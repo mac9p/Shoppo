@@ -2,12 +2,14 @@ package io.github.mac9p.shopapp.Controllers;
 
 import io.github.mac9p.shopapp.Model.Product;
 import io.github.mac9p.shopapp.Services.ProductService;
+import net.minidev.json.JSONArray;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/products")
+@CrossOrigin("http://localhost:4200")
 public class ProductController {
     private final ProductService productService;
 
