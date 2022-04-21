@@ -16,8 +16,11 @@ export class ProductService {
       //map(response => response.products)
     //);
   //}
-  getAllProducts(): Observable<Product[]> {
-    return this.httpClient.get<Product[]>(this.baseUrl)
+  getAllProducts(currentCategoryId: number): Observable<Product[]> {
+
+    const searchUrl = `${this.baseUrl}/byCategoryId?id=${currentCategoryId}`;
+
+    return this.httpClient.get<Product[]>(searchUrl)
   }
 }
 

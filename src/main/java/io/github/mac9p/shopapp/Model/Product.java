@@ -3,7 +3,9 @@ package io.github.mac9p.shopapp.Model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -15,6 +17,8 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
+@ToString
 @Table(name = "product")
 public class Product {
     @Id
@@ -32,10 +36,29 @@ public class Product {
     private LocalDate dateCreated;
     @UpdateTimestamp
     private LocalDate lastUpdated;
-    @ManyToOne
+    @ManyToOne(
+            cascade = CascadeType.ALL
+    )
     @JoinColumn(name = "category_id")
     @JsonIgnore
     private ProductCategory productCategory;
 
-
+    public Product(
+                   String sku,
+                   String name,
+                   String description,
+                   Double unitPrice,
+                   String imageUrl,
+                   Boolean isActive,
+                   Integer unitsInStock,
+                   ProductCategory productCategory) {
+        this.sku = sku;
+        this.name = name;
+        this.description = description;
+        this.unitPrice = unitPrice;
+        this.imageUrl = imageUrl;
+        this.isActive = isActive;
+        this.unitsInStock = unitsInStock;
+        this.productCategory = productCategory;
+    }
 }

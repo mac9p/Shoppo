@@ -3,6 +3,8 @@ package io.github.mac9p.shopapp.Controllers;
 import io.github.mac9p.shopapp.Model.Product;
 import io.github.mac9p.shopapp.Services.ProductService;
 import net.minidev.json.JSONArray;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,5 +27,10 @@ public class ProductController {
     @GetMapping("/{id}")
     public Product getProductById(@PathVariable Long id){
         return productService.findProductById(id);
+    }
+
+    @GetMapping("/byCategoryId")
+    public List<Product> findProductsByCategoryId(@RequestParam Long id){
+        return productService.findProductsByCategoryId(id);
     }
 }
