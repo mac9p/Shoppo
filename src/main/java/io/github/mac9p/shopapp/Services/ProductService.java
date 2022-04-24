@@ -36,7 +36,7 @@ public class ProductService {
         return productRepository.findProductsByProductCategoryId(id);
     }
 
-    public List<Product> findProductByNameContains(@NotBlank String keyWord){
-        return productRepository.findProductsByNameContains(keyWord);
+    public List<Product> findProductsByNameContaining(@NotBlank String keyWord){
+        return productRepository.findProductsByNameContaining(keyWord);
     }
 }
