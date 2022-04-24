@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class ProductService {
         return productRepository.save(product);
     }
 
-    public Product findProductById(Long id){
+    public Product findProductById(@NotNull Long id){
         return productRepository.findProductById(id);
     }
 
@@ -31,7 +32,11 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public List<Product> findProductsByCategoryId(Long id){
+    public List<Product> findProductsByCategoryId(@NotNull Long id){
         return productRepository.findProductsByProductCategoryId(id);
+    }
+
+    public List<Product> findProductByNameContains(@NotBlank String keyWord){
+        return productRepository.findProductsByNameContains(keyWord);
     }
 }

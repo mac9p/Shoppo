@@ -4,6 +4,7 @@ import io.github.mac9p.shopapp.Repositories.ProductRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -16,11 +17,12 @@ class ProductCategoryServiceTest {
     @Mock
     private ProductRepository productRepository;
 
+    @InjectMocks
     private ProductService underTest;
 
     @BeforeEach
     void setUp() {
-        underTest = new ProductService(productRepository);
+        //underTest = new ProductService(productRepository);
     }
 
     @Test

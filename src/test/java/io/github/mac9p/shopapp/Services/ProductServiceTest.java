@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -23,11 +24,12 @@ class ProductServiceTest {
 
     @Mock
     private ProductRepository productRepository;
+    @InjectMocks
     private ProductService underTest;
 
     @BeforeEach
     void setUp() {
-        underTest = new ProductService(productRepository);
+        //underTest = new ProductService(productRepository);
     }
 
     @AfterEach

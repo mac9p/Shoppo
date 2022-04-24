@@ -33,4 +33,9 @@ public class ProductController {
     public List<Product> findProductsByCategoryId(@RequestParam Long id){
         return productService.findProductsByCategoryId(id);
     }
+
+    @GetMapping("/byKeyWord")
+    public List<Product> findProductsByKeyword(@RequestParam String keyword){
+        return productService.findProductByNameContains(keyword);
+    }
 }
