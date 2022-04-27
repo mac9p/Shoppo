@@ -20,8 +20,12 @@ export class ProductService {
   //}
   getAllProducts(currentCategoryId: number): Observable<Product[]> {
 
-    const searchUrl = `${this.productUrl}/byCategoryId?id=${currentCategoryId}`
+    const searchUrl = `${this.productUrl}/byCategoryId?id=${currentCategoryId}`;
 
+    return this.httpClient.get<Product[]>(searchUrl);
+  }
+  getProductsByKeyword(currentKeyword: String): Observable<Product[]>{
+    const searchUrl = `${this.productUrl}/byKeyword?keyword=${currentKeyword}`;
     return this.httpClient.get<Product[]>(searchUrl)
   }
 

@@ -17,6 +17,13 @@
                     </div>
 
                 </div>
+
+              <!-- if no products found-->
+              <div *ngIf="products == null || products.length == 0"
+                   class="alert alert-warning col-2" role="alert">
+                no products have been found!
+              </div>
+
             </div>
         </div>
     </div>
