@@ -33,6 +33,11 @@ export class ProductService {
     return this.httpClient.get<ProductCategory[]>(this.productCategoryUrl)
 
   }
+
+  getProduct(currentProductId: number): Observable<Product>{
+    const searchUrl = `${this.productUrl}/byId?id=${currentProductId}`;
+    return this.httpClient.get<Product>(searchUrl);
+  }
 }
 
 interface GetResponse{
