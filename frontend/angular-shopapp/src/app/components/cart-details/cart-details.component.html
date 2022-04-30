@@ -1,0 +1,15 @@
+<div class="detail-section"></div>
+<div class="container-fluid">
+  <div *ngFor="let product of cartItems" class="col-md-3">
+    <img src="{{product?.imageUrl}}" class="detail-img">
+    <h3>{{product?.name}}</h3>
+    <hr>
+  </div>
+  <p>Total price to pay: {{totalPrice}}</p>
+  <p>Total quantity of products: {{totalQuantity}}</p>
+
+  <div *ngIf="cartItems == null || cartItems.length == 0"
+       class="alert alert-warning col-2" role="alert">
+    no products have been added to cart!
+  </div>
+</div>
