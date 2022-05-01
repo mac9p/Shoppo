@@ -1,11 +1,30 @@
 <div class="detail-section"></div>
 <div class="container-fluid">
-  <div *ngFor="let product of cartItems" class="col-md-3">
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Product</th>
+      <th>Price</th>
+      <th>quantity</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr *ngFor="let product of cartItems">
+      <td>{{product.name}}</td>
+      <td>{{product.unitPrice*product.quantity | currency: "USD"}}</td>
+      <td>{{product.quantity}}</td>
+    </tr>
+    </tbody>
+
+
+  </table>
+  <!--<div *ngFor="let product of cartItems" class="col-md-3">
     <img src="{{product?.imageUrl}}" class="detail-img">
     <h3>{{product?.name}}</h3>
     <hr>
-  </div>
-  <p>Total price to pay: {{totalPrice}}</p>
+  </div>-->
+  <p>Total price to pay: {{totalPrice | currency: "USD"}}</p>
   <p>Total quantity of products: {{totalQuantity}}</p>
 
   <div *ngIf="cartItems == null || cartItems.length == 0"
