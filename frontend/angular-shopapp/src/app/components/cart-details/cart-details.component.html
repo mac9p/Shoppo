@@ -13,7 +13,25 @@
     <tr *ngFor="let product of cartItems">
       <td>{{product.name}}</td>
       <td>{{product.unitPrice*product.quantity | currency: "USD"}}</td>
-      <td>{{product.quantity}}</td>
+      <td>
+        <div class="row no-gutters">
+          <div class="col">
+            <button (click)="incrementProduct(product)" class="btn btn-primary btn-light">
+              <i class="fas fa-plus"></i>
+            </button>
+          </div>
+          <div class="col">
+            {{product.quantity}}
+          </div>
+          <div class="col">
+            <button (click)="decrementProduct(product)" class="btn btn-primary btn-light">
+              <i class="fas fa-minus"></i>
+            </button>
+          </div>
+
+        </div>
+
+      </td>
     </tr>
     </tbody>
 

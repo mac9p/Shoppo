@@ -52,4 +52,22 @@ export class CartService {
     this.totalPrice.next(totalPrice);
     this.totalQuantity.next(totalQuantity);
   }
+
+  removeFromCart(itemToRemove: CartItem){
+    let existingCartItem: CartItem = undefined!;
+
+    if (this.cartItems.length > 0) {
+
+      existingCartItem = this.cartItems.find(item => item.id == itemToRemove.id)!;
+
+      if (existingCartItem.quantity>1)
+        existingCartItem.quantity--;
+      else {
+        this.cartItems.forEach( (item, index) => {
+          if(item == itemToRemove) this.cartItems.splice(index,1);
+      });
+    }
+    }
+    this.countTotalCart();
+  }
 }
