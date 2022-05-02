@@ -87,4 +87,13 @@ class ProductServiceTest {
         verify(productRepository,times(1)).findProductsByProductCategoryId(1l);
 
     }
+
+    @Test
+    void findProductsByNameContaining(){
+        //when
+        underTest.findProductsByNameContaining("java");
+        //then
+        verify(productRepository,times(1)).findProductsByNameContaining("java");
+
+    }
 }

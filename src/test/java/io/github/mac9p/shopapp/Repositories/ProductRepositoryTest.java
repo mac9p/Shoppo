@@ -2,18 +2,16 @@ package io.github.mac9p.shopapp.Repositories;
 
 import io.github.mac9p.shopapp.Model.Product;
 import io.github.mac9p.shopapp.Model.ProductCategory;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
 class ProductRepositoryTest {
@@ -21,38 +19,14 @@ class ProductRepositoryTest {
     @Autowired
     private ProductRepository underTest;
 
-    @Autowired
-    private ProductCategoryRepository productCatRepo;
+    static private Product product1;
+    static private Product product2;
+    static private ProductCategory category1;
 
-
-
-    @Test
-    void itShouldfindProductById() {
-        //given
-        Product product = new Product(
-                "exSku",
-                "exName",
-                "exDesc",
-                30.0,
-                "exUrl",
-                true,
-                15,
-                new ProductCategory()
-                );
-        Product savedProduct = underTest.save(product);
-
-        //when
-        Product foundProduct = underTest.findProductById(1L);
-
-        //then
-        assertThat(foundProduct).isEqualTo(savedProduct);
-    }
-
-    @Test
-    void itShouldfindProductsByProductCategoryId() {
-        //given
-        ProductCategory category = productCatRepo.save(new ProductCategory());
-        Product product1 = new Product(
+    @BeforeAll
+    static void setUp() {
+        category1 = new ProductCategory();
+        product1 = new Product(
                 "exSku1",
                 "exName1",
                 "exDesc1",
@@ -60,9 +34,9 @@ class ProductRepositoryTest {
                 "exUrl1",
                 true,
                 15,
-                category
+                category1
         );
-        Product product2 = new Product(
+        product2 = new Product(
                 "exSku2",
                 "exName2",
                 "exDesc2",
@@ -70,10 +44,29 @@ class ProductRepositoryTest {
                 "exUrl2",
                 true,
                 15,
-                category
+                category1
         );
-        underTest.save(product1);
-        underTest.save(product2);
+    }
+
+    @Test
+    void itShouldfindProductById() {
+        //given
+
+        Product savedProduct = underTest.save(product1);
+
+        //when
+        Product foundProduct = underTest.findProductById(savedProduct.getId());
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + foundProduct);
+        //then
+        assertThat(foundProduct).isEqualTo(savedProduct);
+    }
+
+    @Test
+    void itShouldfindProductsByProductCategoryId() {
+        //given
+
+        Product saved1 = underTest.save(product1);
+        Product saved2 = underTest.save(product2);
 
         //when
 
@@ -81,7 +74,21 @@ class ProductRepositoryTest {
 
         //then
 
-        assertThat(Arrays.asList(product1,product2)).isEqualTo(foundProducts);
+        assertThat(Arrays.asList(saved1, saved2)).isEqualTo(foundProducts);
 
+    }
+
+    @Test
+    void itShouldFindProductsByNameContaining() {
+        //given
+        Product saved1 = underTest.save(product1);
+        Product saved2 = underTest.save(product2);
+        //when
+
+        List<Product> foundProducts = underTest.findProductsByNameContaining("1");
+
+        //then
+
+        assertThat(Collections.singletonList(saved1)).isEqualTo(foundProducts);
     }
 }
