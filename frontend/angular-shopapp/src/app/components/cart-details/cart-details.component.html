@@ -44,6 +44,9 @@
   </div>-->
   <p>Total price to pay: {{totalPrice | currency: "USD"}}</p>
   <p>Total quantity of products: {{totalQuantity}}</p>
+  <p>
+    <button routerLink="/checkout" class="btn btn-primary btn-light">Checkout</button>
+  </p>
 
   <div *ngIf="cartItems == null || cartItems.length == 0"
        class="alert alert-warning col-2" role="alert">
