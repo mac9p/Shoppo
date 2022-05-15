@@ -8,7 +8,7 @@
       <input formControlName="firstName" type="text">
 
       <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="alert-warning">
-        <div *ngIf="firstName.errors?.['required']">
+        <div *ngIf="firstName.errors?.['required'] || firstName.errors?.['notWhiteSpace']">
           first name is required!
         </div>
       <div *ngIf="firstName.errors?.['minlength']">
@@ -21,12 +21,28 @@
         <label>Last name</label>
       </div>
       <input formControlName="lastName" type="text">
+      <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="alert-warning">
+        <div *ngIf="lastName.errors?.['required']|| lastName.errors?.['notWhiteSpace']">
+          last name is required!
+        </div>
+        <div *ngIf="lastName.errors?.['minlength']">
+          last name is too short!
+        </div>
+      </div>
     </div>
     <div class="row">
       <div class="col">
         <label>E-mail address</label>
       </div>
       <input formControlName="email" type="email">
+      <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert-warning">
+        <div *ngIf="email.errors?.['required']|| email.errors?.['notWhiteSpace']">
+          email is required!
+        </div>
+        <div *ngIf="email.errors?.['pattern']">
+          email is not right!
+        </div>
+      </div>
     </div>
     <div class="row">
       <div class="col">
@@ -278,7 +294,15 @@
       <div class="col">
         <label>Phone number</label>
       </div>
-      <input formControlName="phoneNumber" type="number">
+      <input formControlName="phoneNumber" type="text">
+      <div *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)" class="alert-warning">
+        <div *ngIf="phoneNumber.errors?.['required']|| phoneNumber.errors?.['notWhiteSpace']">
+          phone number is required!
+        </div>
+        <div *ngIf="phoneNumber.errors?.['pattern']">
+          phone number is not right!
+        </div>
+      </div>
     </div>
   </div>
   <div formGroupName="shipping" class="form-area">
@@ -288,24 +312,50 @@
         <label>City</label>
       </div>
       <input formControlName="city" type="text">
+      <div *ngIf="shippingCity.invalid && (shippingCity.touched || shippingCity.dirty)">
+        <div *ngIf="shippingCity.errors?.['required']">
+          shipping city is required!
+        </div>
+        <div *ngIf="shippingCity.errors?.['minlength']">
+          your city name is too short!
+        </div>
+      </div>
     </div>
     <div class="row">
       <div class="col">
         <label>Street</label>
       </div>
       <input formControlName="street" type="text">
+      <div *ngIf="shippingStreet.invalid && (shippingStreet.touched || shippingStreet.dirty)">
+        <div *ngIf="shippingStreet.errors?.['required']">
+          shipping street is required!
+        </div>
+        <div *ngIf="shippingStreet.errors?.['minlength']">
+          your street name is too short!
+        </div>
+      </div>
     </div>
     <div class="row">
       <div class="col">
         <label>house/apartment number</label>
       </div>
       <input formControlName="number" type="number">
+      <div *ngIf="shippingNumber.invalid && (shippingNumber.touched || shippingNumber.dirty)">
+        <div *ngIf="shippingNumber.errors?.['required']|| shippingNumber.errors?.['notWhiteSpace']">
+          shipping number is required!
+        </div>
+      </div>
     </div>
     <div class="row">
       <div class="col">
         <label>Postal code</label>
       </div>
       <input formControlName="postalCode" type="text">
+      <div *ngIf="shippingPostalCode.invalid && (shippingPostalCode.touched || shippingPostalCode.dirty)">
+        <div *ngIf="shippingPostalCode.errors?.['required']">
+          shipping postal code is required!
+        </div>
+      </div>
     </div>
     <div class="row">
       <div class="col">
@@ -561,24 +611,50 @@
         <label>City</label>
       </div>
       <input formControlName="city" type="text">
+      <div *ngIf="billingCity.invalid && (billingCity.touched || billingCity.dirty)">
+        <div *ngIf="billingCity.errors?.['required']">
+          billing city is required!
+        </div>
+        <div *ngIf="billingCity.errors?.['minlength']">
+          your city name is too short!
+        </div>
+      </div>
     </div>
     <div class="row">
       <div class="col">
         <label>Street</label>
       </div>
       <input formControlName="street" type="text">
+      <div *ngIf="billingStreet.invalid && (billingStreet.touched || billingStreet.dirty)">
+        <div *ngIf="billingStreet.errors?.['required']">
+          billing street is required!
+        </div>
+        <div *ngIf="billingStreet.errors?.['minlength']">
+          your street name is too short!
+        </div>
+      </div>
     </div>
     <div class="row">
       <div class="col">
         <label>house/apartment number</label>
       </div>
       <input formControlName="number" type="number">
+      <div *ngIf="billingNumber.invalid && (billingNumber.touched || billingNumber.dirty)">
+        <div *ngIf="billingNumber.errors?.['required']|| billingNumber.errors?.['notWhiteSpace']">
+          billing number is required!
+        </div>
+      </div>
     </div>
     <div class="row">
       <div class="col">
         <label>Postal code</label>
       </div>
       <input formControlName="postalCode" type="text">
+      <div *ngIf="billingPostalCode.invalid && (billingPostalCode.touched || billingPostalCode.dirty)">
+        <div *ngIf="billingPostalCode.errors?.['required']">
+          billing postal code is required!
+        </div>
+      </div>
     </div>
     <div class="row">
       <div class="col">
@@ -842,7 +918,18 @@
         </option>
       </select>
     </div>
-
+    <div class="row">
+    <div class="col">Card Number</div>
+    <input formControlName="cardNumber" type="text">
+    <div *ngIf="billingCardNumber.invalid && (billingCardNumber.touched || billingCardNumber.dirty)">
+      <div *ngIf="billingCardNumber.errors?.['required'] || billingCardNumber.errors?.['notWhiteSpace']">
+        card number is required!
+      </div>
+      <div *ngIf="billingCardNumber.errors?.['minlength']">
+        your card number is too short!
+      </div>
+    </div>
+    </div>
   </div>
   <div class="text-lg-center">
     <p>total price: {{totalPrice | currency: 'EUR'}}</p>
