@@ -15,14 +15,17 @@ export class CheckoutComponent implements OnInit {
 
   totalPrice!: number;
   totalQuantity!: number;
-  creditCardMonths: number[] = [];
-  creditCardYears: number[] = [];
+  creditCardMonths!: number[];
+  creditCardYears!: number[];
 
   constructor(private formBuilder: FormBuilder, private cartService: CartService, private formService: ShoppoFormService) {
   }
 
   ngOnInit(): void {
 
+    this.getCartDetails();
+    this.getCreditCardMonths();
+    this.getCreditCardYears();
     this.checkoutFormGroup = this.formBuilder.group({
       customer: this.formBuilder.group({
 
@@ -51,16 +54,13 @@ export class CheckoutComponent implements OnInit {
         street: new FormControl('', [Validators.required, Validators.minLength(3)]),
         number: new FormControl('', [Validators.required, ShoppoValidators.notWhiteSpace]),
         postalCode: new FormControl('', [Validators.required]),
-        cardNumber: new FormControl('', [Validators.required, ShoppoValidators.notWhiteSpace, Validators.minLength(13)]),
+        cardNumber: new FormControl('', [Validators.required, ShoppoValidators.notWhiteSpace,
+          Validators.minLength(13)]),
         expirationMonth: new FormControl(0, Validators.required),
         expirationYear: new FormControl(0, Validators.required),
       })
     });
-    this.getCartDetails();
-    this.getCreditCardMonths();
-    this.getCreditCardYears();
   }
-
   get firstName() {
     return this.checkoutFormGroup.get('customer.firstName')!;
   }
@@ -126,6 +126,7 @@ export class CheckoutComponent implements OnInit {
 
 
   getCreditCardYears() {
+    this.formService.getCreditCardYears().subscribe(data => console.log(data));
     this.formService.getCreditCardYears().subscribe(data => this.creditCardYears = data);
   }
 
