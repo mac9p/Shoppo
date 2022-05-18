@@ -3,6 +3,11 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {CartService} from "../../services/cart.service";
 import {ShoppoFormService} from "../../services/shoppo-form.service";
 import {ShoppoValidators} from "../../common/validators/shoppo-validators";
+import {CheckoutService} from "../../services/checkout.service";
+import {Purchase} from "../../common/purchase";
+import {Order} from "../../common/order";
+import {OrderItem} from "../../common/order-item";
+import {Router, RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-checkout',
@@ -18,7 +23,7 @@ export class CheckoutComponent implements OnInit {
   creditCardMonths!: number[];
   creditCardYears!: number[];
 
-  constructor(private formBuilder: FormBuilder, private cartService: CartService, private formService: ShoppoFormService) {
+  constructor(private formBuilder: FormBuilder,private router: Router, private cartService: CartService, private formService: ShoppoFormService,private checkoutService: CheckoutService) {
   }
 
   ngOnInit(): void {
@@ -38,8 +43,7 @@ export class CheckoutComponent implements OnInit {
 
         country: new FormControl('', [Validators.required]),
 
-        phoneNumber: new FormControl('', [Validators.required,
-          Validators.pattern("/\\(?([0-9]{3})\\)?([ .-]?)([0-9]{3})\\2([0-9]{4})/")]),
+        phoneNumber: new FormControl('', [Validators.required])
       }),
       shipping: this.formBuilder.group({
         country: new FormControl('', [Validators.required]),
@@ -131,11 +135,36 @@ export class CheckoutComponent implements OnInit {
   }
 
   submit() {
-    console.log(this.checkoutFormGroup.get("customer")?.value);
+    //console.log(this.checkoutFormGroup.get("customer")?.value);
 
     if (this.checkoutFormGroup.invalid) {
       this.checkoutFormGroup.markAllAsTouched();
+    }else {
+      let purchase = new Purchase();
+      purchase.customer = this.checkoutFormGroup.get('customer')?.value;
+      purchase.orderItems = this.cartService.cartItems.map(cartItem => new OrderItem(cartItem));
+      purchase.shippingAddress = this.checkoutFormGroup.get('shipping')?.value;
+      purchase.billingAddress = this.checkoutFormGroup.get('billing')?.value;
+      let order = new Order();
+      order.totalPrice = this.totalPrice;
+      order.totalQuantity = this.totalQuantity;
+      purchase.order = order;
+      console.log(purchase.billingAddress);
+      this.checkoutService.postOrder(purchase).subscribe()
+
+      this.resetCart();
     }
+
+  }
+
+  resetCart(){
+    this.cartService.cartItems = [];
+    this.cartService.totalQuantity.next(0);
+    this.cartService.totalPrice.next(0);
+
+    this.checkoutFormGroup.reset();
+
+    this.router.navigateByUrl("/products");
   }
 
 }

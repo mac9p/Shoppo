@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin("https://localhost:4200")
+@CrossOrigin("http://localhost:4200")
 @RequestMapping("/checkout")
 public class CheckoutController {
 
