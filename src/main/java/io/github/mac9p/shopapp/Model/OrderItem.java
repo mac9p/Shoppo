@@ -1,5 +1,6 @@
 package io.github.mac9p.shopapp.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -14,9 +15,7 @@ public class OrderItem {
     private Double price;
     private Integer quantity;
     @ManyToOne
-    @PrimaryKeyJoinColumn
+    @JoinColumn(name = "order_id")
     private Order order;
-    @OneToOne
-    @PrimaryKeyJoinColumn
-    private Product product;
+    private Long productId;
 }

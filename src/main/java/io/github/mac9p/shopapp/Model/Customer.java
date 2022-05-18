@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -17,7 +18,6 @@ public class Customer {
     private String lastName;
     private String email;
 
-    @OneToMany
-    @JoinColumn(name = "customer_id")
-    private Set<Order> orderSet;
+    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
+    private Set<Order> orderSet = new HashSet<>();
 }

@@ -1,11 +1,13 @@
 package io.github.mac9p.shopapp.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -22,10 +24,10 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "billing_address_id")
     private Address billingAddress;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "shipping_address_id")
     private Address shippingAddress;
     private String orderStatus;
@@ -34,6 +36,7 @@ public class Order {
     @UpdateTimestamp
     private LocalDate lastUpdated;
 
-    @OneToMany(mappedBy = "order")
-    private Set<OrderItem> orderItems;
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "order")
+    @JsonIgnore
+    private Set<OrderItem> orderItems = new HashSet<>();
 }

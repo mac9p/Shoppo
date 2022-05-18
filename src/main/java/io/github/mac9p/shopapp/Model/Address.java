@@ -3,6 +3,7 @@ package io.github.mac9p.shopapp.Model;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Data
@@ -19,4 +20,5 @@ public class Address {
     @OneToOne
     @PrimaryKeyJoinColumn
     private Order order;
+
 }

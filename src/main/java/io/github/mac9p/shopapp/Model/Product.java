@@ -42,8 +42,6 @@ public class Product {
     @JoinColumn(name = "category_id")
     @JsonIgnore
     private ProductCategory productCategory;
-    @OneToOne
-    private OrderItem orderItem;
 
     public Product(
                    String sku,
