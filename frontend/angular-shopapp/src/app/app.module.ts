@@ -16,6 +16,9 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {CheckoutService} from "./services/checkout.service";
 import {ShoppoFormService} from "./services/shoppo-form.service";
+import { LoginComponent } from './components/login/login.component';
+import {OktaAuthModule} from "@okta/okta-angular";
+import { LoginStatusComponent } from './components/login-status/login-status.component';
 
 const routes: Routes = [
   {path: 'search/:keyword', component: ProductListComponent},
@@ -40,13 +43,16 @@ const routes: Routes = [
     ProductDetailsComponent,
     CartStatusComponent,
     CartDetailsComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    LoginComponent,
+    LoginStatusComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
     BrowserModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    OktaAuthModule
   ],
   providers: [ProductService,CartService,CheckoutService,ShoppoFormService],
   bootstrap: [AppComponent]
