@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { HttpClientModule} from '@angular/common/http';
 import { ProductService } from './services/product.service';
-import { Routes, RouterModule } from '@angular/router';
+import {Routes, RouterModule, Router} from '@angular/router';
 import { ProductCategoryMenuComponent } from './components/product-category-menu/product-category-menu.component';
 import { SearchComponent } from './components/search/search.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
@@ -17,10 +17,16 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {CheckoutService} from "./services/checkout.service";
 import {ShoppoFormService} from "./services/shoppo-form.service";
 import { LoginComponent } from './components/login/login.component';
-import {OktaAuthModule} from "@okta/okta-angular";
+import {OKTA_CONFIG, OktaAuthModule, OktaCallbackComponent} from "@okta/okta-angular";
 import { LoginStatusComponent } from './components/login-status/login-status.component';
+import ShoppoConfig from './config/shoppo-config';
+import {OktaAuth} from "@okta/okta-auth-js";
+
+
 
 const routes: Routes = [
+  {path: 'login/callback',component: OktaCallbackComponent},
+  {path: 'login',component: LoginComponent},
   {path: 'search/:keyword', component: ProductListComponent},
   {path: 'category/:id/:categoryName',component: ProductListComponent},
   {path: 'products/:id',component: ProductDetailsComponent},
@@ -33,6 +39,8 @@ const routes: Routes = [
 
 
 ];
+
+const oktaAuth = new OktaAuth(ShoppoConfig.oidc);
 
 @NgModule({
   declarations: [
@@ -54,7 +62,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     OktaAuthModule
   ],
-  providers: [ProductService,CartService,CheckoutService,ShoppoFormService],
+  providers: [ProductService,CartService,CheckoutService,ShoppoFormService,{provide: OKTA_CONFIG,useValue: {oktaAuth}}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
