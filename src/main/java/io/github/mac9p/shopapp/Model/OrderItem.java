@@ -15,7 +15,8 @@ public class OrderItem {
     private Double price;
     private Integer quantity;
     @ManyToOne
-    @JoinColumn(name = "order_id")
+    @JoinColumn
     private Order order;
     private Long productId;
+
 }

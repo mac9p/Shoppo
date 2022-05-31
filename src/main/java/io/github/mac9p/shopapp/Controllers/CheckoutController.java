@@ -1,9 +1,8 @@
 package io.github.mac9p.shopapp.Controllers;
 
 import io.github.mac9p.shopapp.Services.CheckoutService;
-import io.github.mac9p.shopapp.dto.Purchase;
-import io.github.mac9p.shopapp.dto.PurchaseResponse;
-import org.springframework.stereotype.Controller;
+import io.github.mac9p.shopapp.Model.Purchase;
+import io.github.mac9p.shopapp.Model.PurchaseResponse;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

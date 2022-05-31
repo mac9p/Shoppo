@@ -21,4 +21,5 @@ public class Address {
     @PrimaryKeyJoinColumn
     private Order order;
 
+
 }

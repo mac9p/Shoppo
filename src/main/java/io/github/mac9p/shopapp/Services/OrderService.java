@@ -18,4 +18,8 @@ public class OrderService {
     public List<Order> findALlOrders(){
         return orderRepository.findAll();
     }
+
+    public Set<Order> getOrdersByCustomerEmail(String email){
+        return orderRepository.findOrderByCustomer_Email(email);
+    }
 }

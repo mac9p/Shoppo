@@ -5,8 +5,7 @@ import io.github.mac9p.shopapp.Model.Customer;
 import io.github.mac9p.shopapp.Model.Order;
 import io.github.mac9p.shopapp.Repositories.CustomerRepository;
 import io.github.mac9p.shopapp.Repositories.OrderRepository;
-import io.github.mac9p.shopapp.dto.Purchase;
-import org.junit.jupiter.api.BeforeEach;
+import io.github.mac9p.shopapp.Model.Purchase;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -16,7 +15,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.HashSet;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)

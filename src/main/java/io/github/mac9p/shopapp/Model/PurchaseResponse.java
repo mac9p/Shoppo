@@ -1,4 +1,4 @@
-package io.github.mac9p.shopapp.dto;
+package io.github.mac9p.shopapp.Model;
 
 import lombok.Data;
 
