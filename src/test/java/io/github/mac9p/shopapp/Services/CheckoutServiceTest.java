@@ -21,8 +21,6 @@ import static org.mockito.Mockito.verify;
 class CheckoutServiceTest {
 
     @Mock
-    private OrderRepository orderRepository;
-    @Mock
     private CustomerRepository customerRepository;
     @InjectMocks
     private CheckoutService checkoutService;
@@ -36,9 +34,7 @@ class CheckoutServiceTest {
 
         checkoutService.placeOrder(purchase);
         //then
-        ArgumentCaptor<Order> orderArgumentCaptor = ArgumentCaptor.forClass(Order.class);
         ArgumentCaptor<Customer> customerArgumentCaptor = ArgumentCaptor.forClass(Customer.class);
-        verify(orderRepository).save(orderArgumentCaptor.capture());
         verify(customerRepository).save(customerArgumentCaptor.capture());
     }
 }

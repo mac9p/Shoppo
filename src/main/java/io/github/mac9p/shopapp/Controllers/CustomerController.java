@@ -18,7 +18,7 @@ public class CustomerController {
     }
 
     @GetMapping("/all")
-    private List<Customer> findAllCustomers(){
+    public List<Customer> findAllCustomers(){
         return customerRepository.findAll();
     }
 }

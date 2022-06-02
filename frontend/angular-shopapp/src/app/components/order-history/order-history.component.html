@@ -1,0 +1,26 @@
+<h2>Order History</h2>
+
+<div *ngIf="orderHistory.length > 0">
+  <table class="table-light">
+    <tr>
+      <th width="25%">Order Tracking Number</th>
+      <th width="15%">Total Price</th>
+      <th width="15%">Total Quantity</th>
+      <th width="15%">Date</th>
+    </tr>
+
+    <tr *ngFor="let order of orderHistory">
+      <td>{{order.orderTrackingNumber}}</td>
+      <td>{{order.totalPrice || currency: 'EUR'}}</td>
+      <td>{{order.totalQuantity}}</td>
+      <td>{{order.orderDate}}</td>
+
+    </tr>
+  </table>
+
+  <div *ngIf="orderHistory == null || orderHistory.length == 0" class="alert alert-warning col-2" role="alert">
+    nothing has been ordered yet!
+  </div>
+
+
+</div>

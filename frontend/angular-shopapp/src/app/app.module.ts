@@ -17,16 +17,19 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {CheckoutService} from "./services/checkout.service";
 import {ShoppoFormService} from "./services/shoppo-form.service";
 import { LoginComponent } from './components/login/login.component';
-import {OKTA_CONFIG, OktaAuthModule, OktaCallbackComponent} from "@okta/okta-angular";
+import {OKTA_CONFIG, OktaAuthGuard, OktaAuthModule, OktaCallbackComponent} from "@okta/okta-angular";
 import { LoginStatusComponent } from './components/login-status/login-status.component';
 import ShoppoConfig from './config/shoppo-config';
 import {OktaAuth} from "@okta/okta-auth-js";
+import { OrderHistoryComponent } from './components/order-history/order-history.component';
+import {OrderHistoryService} from "./services/order-history.service";
 
 
 
 const routes: Routes = [
   {path: 'login/callback',component: OktaCallbackComponent},
   {path: 'login',component: LoginComponent},
+  {path: 'order-history', component: OrderHistoryComponent, canActivate: [OktaAuthGuard]},
   {path: 'search/:keyword', component: ProductListComponent},
   {path: 'category/:id/:categoryName',component: ProductListComponent},
   {path: 'products/:id',component: ProductDetailsComponent},
@@ -53,7 +56,8 @@ const oktaAuth = new OktaAuth(ShoppoConfig.oidc);
     CartDetailsComponent,
     CheckoutComponent,
     LoginComponent,
-    LoginStatusComponent
+    LoginStatusComponent,
+    OrderHistoryComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
@@ -62,7 +66,9 @@ const oktaAuth = new OktaAuth(ShoppoConfig.oidc);
     ReactiveFormsModule,
     OktaAuthModule
   ],
-  providers: [ProductService,CartService,CheckoutService,ShoppoFormService,{provide: OKTA_CONFIG,useValue: {oktaAuth}}],
+  providers: [ProductService,CartService,CheckoutService,
+    ShoppoFormService,OrderHistoryService,
+    {provide: OKTA_CONFIG,useValue: {oktaAuth}}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

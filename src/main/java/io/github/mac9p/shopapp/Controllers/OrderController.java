@@ -3,16 +3,14 @@ package io.github.mac9p.shopapp.Controllers;
 import io.github.mac9p.shopapp.Model.Order;
 import io.github.mac9p.shopapp.Services.OrderService;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Set;
 
 @RestController
 @RequestMapping("/orders")
+@CrossOrigin("http://localhost:4200")
 public class OrderController {
 
     private final OrderService orderService;
