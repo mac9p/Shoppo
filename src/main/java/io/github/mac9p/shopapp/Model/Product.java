@@ -12,7 +12,9 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.math.BigInteger;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -43,6 +45,7 @@ public class Product {
     @JsonIgnore
     private ProductCategory productCategory;
 
+
     public Product(
                    String sku,
                    String name,
@@ -61,4 +64,6 @@ public class Product {
         this.unitsInStock = unitsInStock;
         this.productCategory = productCategory;
     }
+
+
 }

@@ -9,6 +9,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -20,5 +22,5 @@ public class Purchase {
     private Address shippingAddress;
     private Address billingAddress;
     private Order order;
-    private Set<OrderItem> orderItemSet = new HashSet<>();
+    private List<OrderItem> orderItems = new LinkedList<>();
 }

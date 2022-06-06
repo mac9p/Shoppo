@@ -8,6 +8,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -21,7 +22,7 @@ public class Order {
     private String orderPostNumber;
     private Double totalPrice;
     private Integer totalQuantity;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "customer_id")
     private Customer customer;
     @OneToOne(cascade = CascadeType.ALL)
@@ -37,6 +38,5 @@ public class Order {
     private LocalDate lastUpdated;
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "order")
-    @JsonIgnore
-    private Set<OrderItem> orderItems = new HashSet<>();
+    private List<OrderItem> orderItems = new LinkedList<>();
 }

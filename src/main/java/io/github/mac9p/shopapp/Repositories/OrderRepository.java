@@ -11,4 +11,6 @@ import java.util.Set;
 public interface OrderRepository extends JpaRepository<Order,Long> {
 
     public Set<Order> findOrderByCustomer_Email(String email);
+
+    public Order findOrderByOrderPostNumber(String orderPostNumber);
 }

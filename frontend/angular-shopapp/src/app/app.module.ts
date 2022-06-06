@@ -23,6 +23,7 @@ import ShoppoConfig from './config/shoppo-config';
 import {OktaAuth} from "@okta/okta-auth-js";
 import { OrderHistoryComponent } from './components/order-history/order-history.component';
 import {OrderHistoryService} from "./services/order-history.service";
+import { OrderHistoryDetailComponent } from './components/order-history-detail/order-history-detail.component';
 
 
 
@@ -57,7 +58,8 @@ const oktaAuth = new OktaAuth(ShoppoConfig.oidc);
     CheckoutComponent,
     LoginComponent,
     LoginStatusComponent,
-    OrderHistoryComponent
+    OrderHistoryComponent,
+    OrderHistoryDetailComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
