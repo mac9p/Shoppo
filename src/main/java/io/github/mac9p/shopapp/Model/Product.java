@@ -8,8 +8,11 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.validator.constraints.URL;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.PositiveOrZero;
 import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -27,12 +30,17 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String sku;
+    @NotBlank
     private String name;
+    @NotBlank
     private String description;
+    @PositiveOrZero
     private Double unitPrice;
+    @URL
     private String imageUrl;
     @Column(name = "active")
     private Boolean isActive;
+    @PositiveOrZero
     private Integer unitsInStock;
     @CreationTimestamp
     private LocalDate dateCreated;

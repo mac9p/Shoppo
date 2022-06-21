@@ -6,6 +6,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.PositiveOrZero;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -20,7 +21,9 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String orderPostNumber;
+    @PositiveOrZero
     private Double totalPrice;
+    @PositiveOrZero
     private Integer totalQuantity;
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "customer_id")

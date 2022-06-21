@@ -40,6 +40,4 @@ export class ProductService {
   }
 }
 
-interface GetResponse{
-    products: Product[];
-}
+
